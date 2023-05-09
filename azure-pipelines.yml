@@ -22,7 +22,7 @@ stages:
     steps:
     - task: Docker@2
       inputs:
-        containerRegistry: 'ajmazhar20 Docker Hub'
+        containerRegistry: 'ajmazhar Docker Hub'
         repository: 'ajmazhar20/weatherapi'
         command: 'buildAndPush'
         Dockerfile: '**/Dockerfile'
