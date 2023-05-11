@@ -27,3 +27,26 @@ stages:
         Dockerfile: 'C:\Users\ajmaz\weatherapi\Dockerfile'
         tags: |
           $(tag)
+- stage: Creation
+  displayName: 'Terraforming on Azure...'
+  dependsOn: Build
+  jobs:
+  - job: Creation
+    displayName: 'Creating Container Instance'
+    pool: MyComputerAgent
+    variables: 
+    - group: ServicePrincipleVarTerraform
+    steps:
+      - script: |
+          set -e
+
+          terraform init -input=false
+          terraform apply -input=false -auto-approve
+        name: 'RunTerraform'
+        displayName: 'Run Terraform'
+        env:
+          ARM_CLIENT_ID: $(ARM_CLIENT_ID)
+          ARM_CLIENT_SECRET: $(ARM_CLIENT_SECRET)
+          ARM_TENANT_ID: $(ARM_TENANT_ID)
+          ARM_SUBSCRIPTION_ID: $(ARM_SUBSCRIPTION_ID)
+          TF_VAR_imagebuild: $(tag)
