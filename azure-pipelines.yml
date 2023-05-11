@@ -24,6 +24,6 @@ stages:
         containerRegistry: 'ajmazhar Docker Hub'
         repository: 'ajmazhar20/weatherapi'
         command: 'buildAndPush'
-        Dockerfile: '**/Dockerfile'
+        Dockerfile: 'C:\Users\ajmaz\weatherapi\Dockerfile'
         tags: |
           $(tag)
